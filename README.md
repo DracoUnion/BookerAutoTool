@@ -138,10 +138,45 @@ auto-tool play-game-chrome -u https://example.com/game --goal "尽快通关并�
 注意：mcp-chrome-bridge 后端使用单例 Server，同一时刻只允许一个 MCP 客户端会话，
 若连接被占用，请先断开其他客户端（如 Claude Code 里的 MCP 配置）。
 
+### wx-auto-reply：后台自动回复 PC 微信白名单好友
+
+后台守护循环：离屏抓取微信窗口画面 -> OCR 识别会话列表与聊天气泡 -> 白名单精确匹配与红点判定
+-> 汇总待回复消息 -> 大模型生成回复 -> 剪贴板粘贴回车静默发送，并做绿底增量闭环验收。
+
+```bash
+# 先用 --dry-run 联调：只识别并生成回复，不真正发送
+auto-tool wx-auto-reply --config wechat_config.json --dry-run --once
+
+# 正式运行：持续扫描并在后台自动回复
+auto-tool wx-auto-reply --config wechat_config.json
+```
+
+依赖 Windows 平台、`numpy`，以及两个可选依赖（惰性导入，未安装不影响其他子命令）：
+
+```bash
+pip install rapidocr_onnxruntime pyperclip
+```
+
+配置文件（默认 `./wechat_config.json`）主要字段：
+
+| 字段 | 说明 |
+| --- | --- |
+| `whitelist_mode` | `true` 仅回复白名单好友；`false` 回复所有非黑名单单聊 |
+| `whitelist` | 允许自动回复的好友昵称列表 |
+| `blacklist` | 永不回复的会话关键词（群聊另有防火墙，按 `群`/人数后缀识别） |
+| `system_prompt` | 大模型的角色提示词 |
+| `friend_personas` | 按好友昵称定制的专属人设 |
+| `check_interval_seconds` | 扫描间隔秒数（可用 `--check-interval` 覆盖） |
+| `reply_delay_seconds` | 生成回复后、发送前的额外延迟 |
+
+配置文件的 `system_prompt`、大模型的 `-m/-k/-H/-tm` 等既可用命令行参数，也可用
+`OPENAI_API_KEY` 等环境变量指定。`--once` 只扫描一轮，`--limit N` 限定扫描轮数。
+
 ## 开发
 
 ```bash
 pip install -e .
 python -m BookerAutoTool -h
 python -m BookerAutoTool play-game -h
+python -m BookerAutoTool wx-auto-reply -h
 ```

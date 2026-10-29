@@ -3,7 +3,7 @@ import sys
 import os
 from . import __version__
 from . import (
-    play_game, play_android_game, play_game_chrome,
+    play_game, play_android_game, play_game_chrome, wx_auto_reply,
 )
 
 def main():
@@ -43,6 +43,8 @@ def main():
     play_game.reg_subparser(subparsers)
     play_android_game.reg_subparser(subparsers)
     play_game_chrome.reg_subparser(subparsers)
+
+    wx_auto_reply.reg_subparser(subparsers)
 
     args = parser.parse_args()
     args.func(args)
