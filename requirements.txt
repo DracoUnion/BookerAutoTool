@@ -1,0 +1,9 @@
+openai
+httpx
+requests
+json_repair
+pydantic
+pyyaml
+pillow
+ctx-compact
+pywin32; sys_platform == 'win32'

@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "BookerAutoTool"
+version = "2026.10.29.0"
+description = "iBooker/DracoUnion 大模型 Agent 自动化工具（游戏 / 安卓 / Chrome 自动化驱动）"
+readme = "README.md"
+license = {text = "SATA"}
+authors = [
+    {name = "wizardforcel", email = "wizard.z@qq.com"},
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "License :: Other/Proprietary License",
+    "Natural Language :: Chinese (Simplified)",
+    "Natural Language :: English",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Text Processing :: Markup :: HTML",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+    "Topic :: Utilities",
+]
+keywords = ["自动化", "游戏", "android", "chrome", "agent", "automation"]
+requires-python = ">=3.10"
+dependencies = [
+    "openai",
+    "httpx",
+    "requests",
+    "json_repair",
+    "pydantic",
+    "pyyaml",
+    "pillow",
+    "ctx-compact",
+    "pywin32; sys_platform == 'win32'",
+]
+
+[project.urls]
+Homepage = "https://github.com/DracoUnion/BookerAutoTool"
+
+[project.scripts]
+BookerAutoTool = "BookerAutoTool.__main__:main"
+auto-tool = "BookerAutoTool.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["BookerAutoTool*"]
+
+[tool.setuptools.package-data]
+"*" = ["*"]
