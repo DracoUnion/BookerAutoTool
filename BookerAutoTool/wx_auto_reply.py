@@ -1139,13 +1139,12 @@ def reg_subparser(subparsers):
     pmt.add_argument('-ua', '--user-agent',
                      default='claude-cli/2.1.41 (external, cli)',
                      help='HTTP User-Agent 请求头')
-    pmt.add_argument('-st', '--stream', action='store_true', help='流式输出模式')
+    pmt.add_argument('-ST', '--no-stream', action='store_true', help='关闭流式输出模式')
     pmt.add_argument('-ct', '--conn-timeout', type=int, default=60,
                      help='连接超时秒数')
     pmt.add_argument('-rt', '--read-timeout', type=int, default=120,
                      help='读取超时秒数')
     pmt.add_argument('-rr', '--repetition-regex', default='', help='重复检测正则')
     pmt.add_argument('-eb', '--extra-body', help='额外请求体')
-    pmt.add_argument('-nt', '--no-think', action='store_true', help='关闭思考模式')
-    pmt.add_argument('-D', '--debug', action='store_true', help='调试模式')
+    pmt.add_argument('-TN', '--no-think', action='store_true', help='关闭思考模式')
     pmt.set_defaults(func=wx_auto_reply_handle)

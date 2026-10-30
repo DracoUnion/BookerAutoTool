@@ -459,5 +459,4 @@ def reg_subparser(subparsers):
         '-lm', '--list-max', type=int, default=50,
         help='未找到目标时最多打印的窗口数',
     )
-    p.add_argument('-D', '--debug', action='store_true', help='调试模式')
     p.set_defaults(func=play_game)

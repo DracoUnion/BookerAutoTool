@@ -375,5 +375,4 @@ def reg_subparser(subparsers):
         '-ld', '--list-devices', action='store_true',
         help='列出已连接的 adb 设备并退出',
     )
-    p.add_argument('-D', '--debug', action='store_true', help='调试模式')
     p.set_defaults(func=play_android_game)

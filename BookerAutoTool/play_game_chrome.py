@@ -555,5 +555,4 @@ def reg_subparser(subparsers):
         '-lb', '--list-tabs', action='store_true',
         help='列出当前打开的标签页并退出',
     )
-    p.add_argument('-D', '--debug', action='store_true', help='调试模式')
     p.set_defaults(func=play_game_chrome)
